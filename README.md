@@ -9,7 +9,7 @@ A PHP and MySQL web application built as a portfolio project. It includes a publ
 - Public blog homepage with category filtering
 - Post detail pages and view counts
 - Admin login with `password_hash()` / `password_verify()`
-- Session-based admin authentication and session ID regeneration
+- Session-based admin authentication, session ID regeneration, and explicit admin-role checks
 - Admin dashboard with category totals
 - Create, read, update and delete (CRUD) operations for posts
 - Prepared MySQLi statements for user authentication and post changes
@@ -32,13 +32,15 @@ A PHP and MySQL web application built as a portfolio project. It includes a publ
 4. Update the database username and password in `config.local.php`. The local configuration file is excluded by the project's `.gitignore`.
 5. Start Apache and MySQL.
 6. Open phpMyAdmin and import `kadir-coaching-blog-source/database/schema.sql`. The script creates the `kadir_coaching` database, the `posts` and `users` tables, and sample post content. It does **not** create an administrator account.
-7. From inside `kadir-coaching-blog-source/`, run `php scripts/create_admin.php` in a terminal and follow the prompts. The password is stored as a hash.
-8. Open the site in your browser, for example `http://localhost/kadir-coaching-blog/`. The admin login is at `/admin/admingiris.php`.
+7. From inside `kadir-coaching-blog-source/`, run `php scripts/create_admin.php` in a terminal and follow the prompts. The script creates an `admin`-role account and stores the password as a hash.
+8. For an existing database, apply `kadir-coaching-blog-source/database/migrations/001_add_user_role.sql` once, then promote only the intended administrator by editing and running the example `UPDATE` statement in that migration. Existing accounts default to the `user` role.
+9. Open the site in your browser, for example `http://localhost/kadir-coaching-blog/`. The admin login is at `/admin/admingiris.php`.
 
 ## Configuration and security
 
 - The public repository does not contain the original local database credentials or administrator account.
 - Create a new local admin account with the CLI script; do not reuse a password from an old development setup.
+- Admin pages require both an authenticated session and the explicit `admin` role.
 - The post editor accepts HTML so formatted articles can be displayed. Only trusted administrators should have access to the admin account, and only trusted HTML should be published.
 - Optional contact links are disabled by default. Add your own values only to local configuration; do not commit private contact details.
 - Bootstrap is loaded from the jsDelivr CDN.
