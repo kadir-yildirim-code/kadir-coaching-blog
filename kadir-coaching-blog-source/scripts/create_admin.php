@@ -13,7 +13,7 @@ if ($username === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($pa
     exit(1);
 }
 $hash = password_hash($password, PASSWORD_DEFAULT);
-$statement = $conn->prepare('INSERT INTO users (USERNAME, MAIL, PASSWORD) VALUES (?, ?, ?)');
+$statement = $conn->prepare("INSERT INTO users (USERNAME, MAIL, PASSWORD, user_role) VALUES (?, ?, ?, 'admin')");
 $statement->bind_param('sss', $username, $email, $hash);
 $statement->execute();
 echo "Admin account created successfully.\n";
