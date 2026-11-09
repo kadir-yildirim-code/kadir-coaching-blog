@@ -11,6 +11,7 @@ A PHP and MySQL web application built as a portfolio project. It includes a publ
 - Admin login with `password_hash()` / `password_verify()`
 - Session-based admin authentication, session ID regeneration, and explicit admin-role checks
 - Admin dashboard with category totals
+- Admin post list with title search, category filtering, and pagination (10 posts per page)
 - Create, read, update and delete (CRUD) operations for posts
 - Prepared MySQLi statements for user authentication and post changes
 - CSRF tokens on admin forms
