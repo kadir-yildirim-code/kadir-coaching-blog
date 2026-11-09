@@ -27,10 +27,9 @@ Dynamic blog and content management application built with PHP and MySQL.
 2. Set your local database connection values in `config.local.php`.
 3. Start Apache and MySQL.
 4. Import `database/schema.sql` using phpMyAdmin.
-5. Run `php scripts/create_admin.php` from a terminal in this directory. It creates an `admin`-role account and stores the password hash.
-
-For an existing installation, apply `database/migrations/001_add_user_role.sql` once, then promote the intended administrator by editing and running the example `UPDATE` statement in that migration. Existing accounts default to the `user` role until explicitly promoted.
-6. Open the site through your local web server.
+5. For a fresh database, run `php scripts/create_admin.php` from a terminal in this directory. It creates an `admin`-role account and stores the password hash.
+6. **For an existing database**, apply `database/migrations/001_add_user_role.sql` once before using the admin panel or running the admin creation script. Existing accounts default to the `user` role; edit and run the example `UPDATE` statement in that migration for the account that should be an administrator.
+7. Open the site through your local web server.
 
 The local `config.local.php` is excluded by `.gitignore`. Never commit database passwords or other secrets. Admin pages require an authenticated session with the explicit `admin` role.
 
