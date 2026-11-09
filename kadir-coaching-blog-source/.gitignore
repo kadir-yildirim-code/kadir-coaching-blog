@@ -1,0 +1,16 @@
+# Local credentials and configuration
+config.local.php
+.env
+.env.*
+
+# Dependencies and generated files
+/vendor/
+/node_modules/
+/*.log
+/logs/
+
+# IDE and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
