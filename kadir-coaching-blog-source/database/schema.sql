@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS users (
   USERNAME VARCHAR(100) NOT NULL,
   MAIL VARCHAR(190) NOT NULL,
   PASSWORD VARCHAR(255) NOT NULL COMMENT 'Stores password_hash() output, never plaintext passwords',
+  user_role ENUM('admin', 'user') NOT NULL DEFAULT 'user',
   PRIMARY KEY (ID),
   UNIQUE KEY uq_users_mail (MAIL)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
