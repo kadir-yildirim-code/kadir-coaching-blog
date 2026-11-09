@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../db.php';
-if (!empty($_SESSION['user_id'])) { header('Location: index.php'); exit; }
+if (!empty($_SESSION['user_id']) && ($_SESSION['user_role'] ?? '') === 'admin') { header('Location: index.php'); exit; }
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!csrf_is_valid()) {
@@ -11,14 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$email || $password === '') {
             $error = 'Geçerli bir e-posta ve parola girin.';
         } else {
-            $statement = $conn->prepare('SELECT ID, USERNAME, PASSWORD FROM users WHERE MAIL = ? LIMIT 1');
+            $statement = $conn->prepare('SELECT ID, USERNAME, PASSWORD, user_role FROM users WHERE MAIL = ? LIMIT 1');
             $statement->bind_param('s', $email);
             $statement->execute();
             $user = $statement->get_result()->fetch_assoc();
-            if ($user && password_verify($password, $user['PASSWORD'])) {
+            if ($user && $user['user_role'] === 'admin' && password_verify($password, $user['PASSWORD'])) {
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = (int)$user['ID'];
                 $_SESSION['username'] = $user['USERNAME'];
+                $_SESSION['user_role'] = $user['user_role'];
                 header('Location: index.php');
                 exit;
             }
