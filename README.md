@@ -33,8 +33,8 @@ A PHP and MySQL web application built as a portfolio project. It includes a publ
 4. Update the database username and password in `config.local.php`. The local configuration file is excluded by the project's `.gitignore`.
 5. Start Apache and MySQL.
 6. Open phpMyAdmin and import `kadir-coaching-blog-source/database/schema.sql`. The script creates the `kadir_coaching` database, the `posts` and `users` tables, and sample post content. It does **not** create an administrator account.
-7. From inside `kadir-coaching-blog-source/`, run `php scripts/create_admin.php` in a terminal and follow the prompts. The script creates an `admin`-role account and stores the password as a hash.
-8. For an existing database, apply `kadir-coaching-blog-source/database/migrations/001_add_user_role.sql` once, then promote only the intended administrator by editing and running the example `UPDATE` statement in that migration. Existing accounts default to the `user` role.
+7. For a fresh database, run `php scripts/create_admin.php` from inside `kadir-coaching-blog-source/` and follow the prompts. The script creates an `admin`-role account and stores the password as a hash.
+8. **When upgrading an older database**, first apply `kadir-coaching-blog-source/database/migrations/001_add_user_role.sql` once, before using the admin panel or running the admin creation script. Existing accounts become `user` by default; edit and run the example `UPDATE` statement in that migration for the one account that should remain an administrator.
 9. Open the site in your browser, for example `http://localhost/kadir-coaching-blog/`. The admin login is at `/admin/admingiris.php`.
 
 ## Configuration and security
