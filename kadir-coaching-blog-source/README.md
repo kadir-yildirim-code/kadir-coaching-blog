@@ -9,6 +9,7 @@ Dynamic blog and content management application built with PHP and MySQL.
 - Admin login with hashed password verification
 - Session-based authentication with an explicit admin-role check
 - Admin dashboard
+- Admin post list with title search, category filtering, and pagination (10 posts per page)
 - Create, read, update and delete blog posts
 - Prepared MySQLi statements for dynamic database operations
 - CSRF protection on admin forms
